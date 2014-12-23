@@ -1,0 +1,25 @@
+1;Liczba wyborców uprawnionych do g³osowania (umieszczonych w spisie, z uwzglêdnieniem dodatkowych formularzy) w chwili zakoñczenia g³osowania
+2;Komisja otrzyma³a kart do g³osowania
+3;Nie wykorzystano kart do g³osowania
+4;Liczba wyborców, którym wydano karty do g³osowania (liczba podpisów w spisie oraz adnotacje „odmowa podpisu”)
+5;Liczba wyborców g³osuj¹cych przez pe³nomocnika (liczba kart do g³osowania wydanych na podstawie otrzymanych przez komisjê aktów pe³nomocnictwa)
+6;Liczba wyborców, którym wys³ano pakiety wyborcze
+7;Liczba otrzymanych kopert zwrotnych
+7a;Liczba kopert zwrotnych, w których nie by³o oœwiadczenia o osobistym i tajnym oddaniu g³osu
+7b;Liczba kopert zwrotnych, w których oœwiadczenie nie by³o podpisane przez wyborcê
+7c;Liczba kopert zwrotnych, w których nie by³o koperty na kartê do g³osowania
+7d;Liczba kopert zwrotnych, w których znajdowa³a siê niezaklejona koperta na kartê do g³osowania
+7e;Liczba kopert na kartê do g³osowania wrzuconych do urny
+8;Liczba kart wyjêtych z urny
+8a;w tym liczba kart wyjêtych z kopert na karty do g³osowania
+9;Liczba kart niewa¿nych (innych ni¿ urzêdowo ustalone lub nieopatrzonych pieczêci¹ obwodowej komisji wyborczej)
+10;Liczba kart wa¿nych
+11;Liczba g³osów niewa¿nych (z kart wa¿nych)
+12;Liczba g³osów wa¿nych oddanych ³¹cznie na wszystkie listy kandydatów (z kart wa¿nych)
+14;Uwagi o przypuszczalnej przyczynie ewentualnej ró¿nicy pomiêdzy sum¹ liczb z pkt. 3 i 4 a liczb¹ z pkt. 2\; je¿eli ró¿nica nie wystêpuje, wpisaæ „brak uwag”:
+15;Uwagi o przypuszczalnej przyczynie ewentualnej ró¿nicy pomiêdzy liczb¹ z pkt. 8 pomniejszon¹ o liczbê z pkt. 8a a liczb¹ z pkt. 4\; je¿eli ró¿nica nie wystêpuje, wpisaæ „brak uwag”
+16;Uwagi o przypuszczalnej przyczynie wyst¹pienia kart niewa¿nych (pkt. 9)\; je¿eli liczba w pkt. 9 wynosi 0, wpisaæ „brak uwag”
+17;W trakcie g³osowania wydano nastêpuj¹ce zarz¹dzenia\; je¿eli nie wydano, wpisaæ „brak zarz¹dzeñ”
+18;Adnotacja o wniesieniu przez mê¿ów zaufania uwag z wymienieniem konkretnych zarzutów***)\; je¿eli nie ma, wpisaæ „brak zarzutów” lub „brak mê¿ów zaufania w obwodzie”:
+19;Adnotacja o wniesieniu przez cz³onków Komisji uwag z wymienieniem konkretnych zarzutów***)\; je¿eli nie ma, wpisaæ „brak zarzutów”
+20;Inne uwagi\; je¿eli nie ma, wpisaæ „brak uwag”
