@@ -16,16 +16,20 @@ qry <- "
 SELECT
         w.id,w.listatxt,w.listaid,w.glosy,
         pu.val as uprawnieni,pk.val as kartywydane,pn.val as glosyniewazne,
-        o.woj,o.powiat,o.gmina 
+        o.woj,o.powiat,o.gmina,t.typgminy,m.mazzaufania
 FROM
         (SELECT id,listatxt,listaid,SUM(t.glosy) AS glosy FROM wyniki AS t WHERE listaid IN (1,2,3,4,5,6,7) GROUP BY id,listaid) AS w,
         obwody AS o,
         protokolynum AS pu,
         protokolynum AS pk,
-        protokolynum AS pn 
+        protokolynum AS pn,
+        gminyteryt AS t,
+        obwodymezowie AS m
 WHERE
         w.listaid IN (1,2,3,4,5,6,7) AND
         w.id=o.id AND
+        w.id=m.id AND
+        o.teryt=t.teryt AND
         w.id=pu.id AND 
         w.id=pk.id AND 
         w.id=pn.id AND 

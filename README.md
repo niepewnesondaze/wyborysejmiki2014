@@ -1,26 +1,26 @@
 
-Analiza wyników wyborów do sejmików wojewódzkich 2014
+Analiza wynikÃ³w wyborÃ³w do sejmikÃ³w wojewÃ³dzkich 2014
 ============================================================
 
 
 #Pobranie danych
-Skrypt pobranie-danych/wybory2014.py jest napisany w Pythonie i œci¹ga raporty RDW z [wizualizacji udostêpnionej przez PKW](http://wybory2014.pkw.gov.pl).
+Skrypt pobranie-danych/wybory2014.py jest napisany w Pythonie i Å›ciÄ…ga raporty RDW z [wizualizacji udostÄ™pnionej przez PKW](http://wybory2014.pkw.gov.pl).
 
-Skrypt dzia³a w sposób rekurencyjny:
-- dla ka¿dego województwa z listy w funkcji main() wchodzi na odpowiedni¹ stronê: np. http://wybory2014.pkw.gov.pl/pl/wyniki/wojewodztwo/view/02
-	- dla ka¿dego powiatu wymienionego na tej stronie wchodzi na odpowiedni¹ stronê z list¹ gmin
-		- dla ka¿dej gminy przegl¹da listê obwodów 
-			- dla ka¿dego obwodu znajduje raport RDW
-		- wyj¹tkiem s¹ powiaty grodzkie (roboczo nazwane w kodzie gminami miejskimi), gdzie lista obwodów znajduje siê poziom wy¿ej - nie ma dostêpnej listy gmin
+Skrypt dziaÅ‚a w sposÃ³b rekurencyjny:
+- dla kaÅ¼dego wojewÃ³dztwa z listy w funkcji main() wchodzi na odpowiedniÄ… stronÄ™: np. http://wybory2014.pkw.gov.pl/pl/wyniki/wojewodztwo/view/02
+	- dla kaÅ¼dego powiatu wymienionego na tej stronie wchodzi na odpowiedniÄ… stronÄ™ z listÄ… gmin
+		- dla kaÅ¼dej gminy przeglÄ…da listÄ™ obwodÃ³w 
+			- dla kaÅ¼dego obwodu znajduje raport RDW
+		- wyjÄ…tkiem sÄ… powiaty grodzkie (roboczo nazwane w kodzie gminami miejskimi), gdzie lista obwodÃ³w znajduje siÄ™ poziom wyÅ¼ej - nie ma dostÄ™pnej listy gmin
 
-Z raportu [(przyk³ad)](http://wybory2014.pkw.gov.pl/pl/wyniki/protokoly/27055/42111) wyci¹gane s¹ wszystkie udostêpnione informacje:
+Z raportu [(przykÅ‚ad)](http://wybory2014.pkw.gov.pl/pl/wyniki/protokoly/27055/42111) wyciÄ…gane sÄ… wszystkie udostÄ™pnione informacje:
 - informacje o obwodzie
-- rozliczenie kart do g³osowania
+- rozliczenie kart do gÅ‚osowania
 - adnotacje i uwagi
-- liczba g³osów na poszczególnych kandydatów
+- liczba gÅ‚osÃ³w na poszczegÃ³lnych kandydatÃ³w
 
-Dziêki temu, w jaki sposób Python obs³uguje dane wejœciowe program mo¿na uruchomiæ i testowaæ podaj¹c albo url albo
-otwarty plik ze œci¹gniêtym HTML do jednej z funkcji dzia³aj¹cych na odpowiednim poziomie:
+DziÄ™ki temu, w jaki sposÃ³b Python obsÅ‚uguje dane wejÅ›ciowe program moÅ¼na uruchomiÄ‡ i testowaÄ‡ podajÄ…c albo url albo
+otwarty plik ze Å›ciÄ…gniÄ™tym HTML do jednej z funkcji dziaÅ‚ajÄ…cych na odpowiednim poziomie:
 ```
 	parseWoj(plik)
 	parsePowiat(plik)
@@ -29,26 +29,28 @@ otwarty plik ze œci¹gniêtym HTML do jednej z funkcji dzia³aj¹cych na odpowiednim
 ```
 
 #Pliki wynikowe
-Skrypt zapisuje wyniki do nastêpuj¹cych plików:
+Skrypt zapisuje wyniki do nastÄ™pujÄ…cych plikÃ³w:
 - obwody.csv - informacje o obwodach
-- protokoly.csv - rozliczenie kart, uwagi i adnotacje dla ka¿dego obwodu
-- wyniki.csv - kandydaci, listy i liczba g³osów w ka¿dym pojedynczym obwodzie
+- protokoly.csv - rozliczenie kart, uwagi i adnotacje dla kaÅ¼dego obwodu
+- wyniki.csv - kandydaci, listy i liczba gÅ‚osÃ³w w kaÅ¼dym pojedynczym obwodzie
 
 #Pliki pomocnicze
 - protokolyitem.csv - klucz do kolejnych pozycji w protokoly.csv
+- gminyteryt.csv - rodzaje gmin (wiejska, miejska, miasto) wg kodÃ³w teryt z [listy obwodÃ³w PKW](http://wybory2014.pkw.gov.pl/pl/pliki)
+- obwodymezowie.csv - odfiltrowana lista uwag mÄ™Å¼Ã³w zaufania (brak mÄ™Å¼Ã³w, brak uwag, uwagi)
 
 #Struktura danych
-- dbload.sql to kod SQL, który tworzy bazê danych i odpowiednie tabele oraz ³aduje wy¿ej wymienione pliki
+- dbload.sql to kod SQL, ktÃ³ry tworzy bazÄ™ danych i odpowiednie tabele oraz Å‚aduje wyÅ¼ej wymienione pliki
 
-Wewn¹trz tego pliku znajduj¹ siê polecenia CREATE TABLE z nazwami i typami kolejnych kolumn w powy¿szych plikach csv.
+WewnÄ…trz tego pliku znajdujÄ… siÄ™ polecenia CREATE TABLE z nazwami i typami kolejnych kolumn w powyÅ¼szych plikach csv.
 
-Do analizy u¿ywam bazy danych [Infobright](http://www.infobright.org/) - MySQL z dodatkowym silnikiem brighthouse, 
+Do analizy uÅ¼ywam bazy danych [Infobright](http://www.infobright.org/) - MySQL z dodatkowym silnikiem brighthouse, 
 
-który fantastycznie szybko dokonuje wyszukiwania, ³¹czenia i agregacji danych.
-Po niewielkich zmianach za pomoc¹ dbload.sql mo¿na za³adowaæ te dane do standardowego MySQL
+ktÃ³ry fantastycznie szybko dokonuje wyszukiwania, Å‚Ä…czenia i agregacji danych.
+Po niewielkich zmianach za pomocÄ… dbload.sql moÅ¼na zaÅ‚adowaÄ‡ te dane do standardowego MySQL
 
-#Przyk³ad u¿ycia
-W pliku analiza.R jest kod, którego u¿y³em do [napisania tego wpisu](http://niepewnesondaze.blogspot.com/2014/12/czy-wybory-samorzadowe-mogy-zostac.html). 
+#PrzykÅ‚ad uÅ¼ycia
+W pliku analiza.R jest kod, ktÃ³rego uÅ¼yÅ‚em do [napisania tego wpisu](http://niepewnesondaze.blogspot.com/2014/12/czy-wybory-samorzadowe-mogy-zostac.html). 
 
-Przyk³adowe dane zagregowane na poziomie obwodów i list (bez pojedynczych kandydatów) s¹ w za³¹czonym data.Rda.
+PrzykÅ‚adowe dane zagregowane na poziomie obwodÃ³w i list (bez pojedynczych kandydatÃ³w) sÄ… w zaÅ‚Ä…czonym data.Rda.
 

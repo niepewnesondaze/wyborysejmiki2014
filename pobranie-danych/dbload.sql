@@ -32,7 +32,15 @@ create table wyniki (
 create table protokolyitem (
 	item varchar(3) not null comment 'lookup',
 	itemtxt text)  engine=brighthouse default charset='UTF8';
-	
+
+create table obwodymezowie (
+	id integer not null,
+	mazzaufania text comment 'lookup')  engine=brighthouse default charset='UTF8';
+
+create table gminyteryt (
+	teryt char(6),
+	typgminy text comment 'lookup')  engine=brighthouse default charset='UTF8';
+
 load data infile 'c:/temp/wybory-samorzadowe2014/obwody.csv' into table obwody fields terminated by ';' ESCAPED BY '\\' lines terminated by '\n';
 load data infile 'c:/temp/wybory-samorzadowe2014/protokoly.csv' into table protokolyraw fields terminated by ';' ESCAPED BY '\\' lines terminated by '\n';
 load data infile 'c:/temp/wybory-samorzadowe2014/wyniki.csv' into table wyniki fields terminated by ';' ESCAPED BY '\\' lines terminated by '\n';
@@ -48,3 +56,6 @@ LINES TERMINATED BY '\n'
 load data infile 'c:/temp/wybory-samorzadowe2014/protokolynum.csv' into table protokolynum fields terminated by ';' ESCAPED BY '\\' lines terminated by '\n';
 
 load data infile 'c:/temp/wybory-samorzadowe2014/protokolyitem.csv' into table protokolyitem fields terminated by ';' ESCAPED BY '\\' lines terminated by '\n';
+
+load data infile 'c:/temp/wybory-samorzadowe2014/obwodymezowie.csv' into table obwodymezowie fields terminated by ';' ESCAPED BY '\\' lines terminated by '\n';
+load data infile 'c:/temp/wybory-samorzadowe2014/gminyteryt.csv' into table gminyteryt fields terminated by ';' ESCAPED BY '\\' lines terminated by '\n';
