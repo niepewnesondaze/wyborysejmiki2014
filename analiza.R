@@ -59,6 +59,10 @@ dfgminy$rezultat.niewazne <- dfgminy$glosyniewazne / dfgminy$kartywydane
 dfgminy$ve <- dfgminy$glosy/dfgminy$uprawnieni
 dfgminy$frek2 <- (dfgminy$kartywydane-dfgminy$glosyniewazne)/dfgminy$uprawnieni
 
+dfgminy$typgminy[dfgminy$typgminy=="Gmina miejska"]<-"Miasto"
+dfgminy$typgminy<-droplevels(dfgminy$typgminy)
+levels(dfgminy$typgminy)<-c("Wieś","Miasto")
+
 listy<-c("PSL","PiS","PO","SLD","KNP")
 kolory<-c("#11881140","#11118840","#ff881140","#88111140","#1111ff40")
 koloryf<-c("#118811","#111188","#ff8811","#881111","#1111ff")
