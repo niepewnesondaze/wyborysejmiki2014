@@ -55,7 +55,6 @@ LINES TERMINATED BY '\n'
 
 load data infile 'c:/temp/wybory-samorzadowe2014/protokolynum.csv' into table protokolynum fields terminated by ';' ESCAPED BY '\\' lines terminated by '\n';
 
-load data infile 'c:/temp/wybory-samorzadowe2014/protokolyitem.csv' into table protokolyitem fields terminated by ';' ESCAPED BY '\\' lines terminated by '\n';
-
-load data infile 'c:/temp/wybory-samorzadowe2014/obwodymezowie.csv' into table obwodymezowie fields terminated by ';' ESCAPED BY '\\' lines terminated by '\n';
-load data infile 'c:/temp/wybory-samorzadowe2014/gminyteryt.csv' into table gminyteryt fields terminated by ';' ESCAPED BY '\\' lines terminated by '\n';
+load data infile 'c:/temp/wybory-samorzadowe2014/protokolyitem.csv' into table protokolyitem fields terminated by ';' ESCAPED BY '\\' lines terminated by '\r\n';
+load data infile 'c:/temp/wybory-samorzadowe2014/obwodymezowie.csv' into table obwodymezowie fields terminated by ';' ESCAPED BY '\\' lines terminated by '\r\n';
+load data infile 'c:/temp/wybory-samorzadowe2014/gminyteryt.csv' into table gminyteryt fields terminated by ';' ESCAPED BY '\\' lines terminated by '\r\n';
