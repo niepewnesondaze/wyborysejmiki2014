@@ -155,3 +155,120 @@ histogram(~rezultat.lista|shortlista,data=dfgminy[dfgminy$shortlista %in% listy,
           main="Wynik listy a liczba obwodów",
           col="gold")
 dev.off()
+
+# mężowie zaufania: rezultaty list ####
+
+png(filename=paste0("maz-frek-listy.png"),width=809,height=655,type="windows",antialias="cleartype")        
+xyplot(rezultat.lista~frekwencja|mazzaufania+shortlista,data=dfgminy[dfgminy$shortlista %in% listy,],col=kolory[3],pch=".",
+       xlab="Frekwencja",ylab="Poparcie dla listy",xlim=c(0,1),ylim=c(0,1),auto.key=TRUE,
+       main="Wyniki list w obwodach")
+stopka()
+dev.off()
+
+# mężowie zaufania: frekwencja ####
+
+f1<-hist(dfgminy$frekwencja[dfgminy$listaid==1 & dfgminy$mazzaufania=="brak mężów"],breaks = 50,plot=FALSE)
+f2<-hist(dfgminy$frekwencja[dfgminy$listaid==1 & dfgminy$mazzaufania=="brak uwag"],breaks = 50,plot=FALSE)
+f3<-hist(dfgminy$frekwencja[dfgminy$listaid==1 & dfgminy$mazzaufania=="uwagi"],breaks = 50,plot=FALSE)
+
+png(filename=paste0("maz-frek-1.png"),width=809,height=655,type="windows",antialias="cleartype")        
+plot(f1$breaks[-1],f1$counts/max(f1$counts),type="s",col="#0000eec0",lwd=2,main="Frekwencja a mężowie zaufania",ylab="Liczba obwodów (przeskalowane do 100%)",xlab="Frekwencja")
+lines(f2$breaks[-1],f2$counts/max(f2$counts),type="s",col="#00ee00c0",lwd=2)
+lines(f3$breaks[-1],f3$counts/max(f3$counts),type="s",col="#ee0000c0",lwd=2)
+legend(x=0,y=1,fill=c("blue","green","red"),legend = c("brak mężów","brak uwag","uwagi"),bty="n",cex=0.8)
+dev.off()
+
+# wygładzone
+png(filename=paste0("maz-frek-2.png"),width=809,height=655,type="windows",antialias="cleartype")
+plot(density(dfgminy$frekwencja[dfgminy$listaid==1 & dfgminy$mazzaufania=="uwagi"]),col="#ee0000c0",main="Frekwencja a mężowie zaufania",ylab="Gęstość rozkładu",xlab="Frekwencja")
+lines(density(dfgminy$frekwencja[dfgminy$listaid==1 & dfgminy$mazzaufania=="brak uwag"]),col="#00ee00c0")
+lines(density(dfgminy$frekwencja[dfgminy$listaid==1 & dfgminy$mazzaufania=="brak mężów"]),col="#0000eec0")
+legend(x=0.05,y=4,fill=c("blue","green","red"),legend = c("brak mężów","brak uwag","uwagi"),bty="n",cex=0.8)
+dev.off()
+
+# bezpośrednio
+png(filename=paste0("maz-frek-3.png"),width=809,height=655,type="windows",antialias="cleartype")        
+histogram(~frekwencja|mazzaufania,data=dfgminy[dfgminy$listaid==1,],
+          type="percent",breaks=50,
+          xlab="Frekwencja",
+          ylab="Odsetek obwodów",
+          main="Frekwencja a mężowie zaufania",
+          layout=c(1,3),
+          col="gold")
+stopka()
+dev.off()
+
+# typ obwodu: wyniki list ####
+
+png(filename=paste0("typ-listy.png"),width=809,height=655,type="windows",antialias="cleartype")
+xyplot(rezultat.lista~frekwencja|typgminy+shortlista,data=dfgminy[dfgminy$shortlista %in% listy,],col=kolory[3],pch=".",
+       xlab="Frekwencja",ylab="Poparcie dla listy",xlim=c(0,1),ylim=c(0,1),auto.key=TRUE,
+       main="Wyniki list w obwodach")
+stopka()
+dev.off()
+
+# typ obwodu: frekwencja ####
+
+f1<-hist(dfgminy$frekwencja[dfgminy$listaid==1 & dfgminy$typgminy=="Miasto"],breaks = 100,plot=FALSE)
+f2<-hist(dfgminy$frekwencja[dfgminy$listaid==1 & dfgminy$typgminy=="Wieś"],breaks = 100,plot=FALSE)
+
+png(filename=paste0("typ-frek-1.png"),width=809,height=655,type="windows",antialias="cleartype")
+plot(f1$breaks[-1],f1$counts,type="s",col="blue",lwd=2,main="Frekwencja wg typu obwodów",ylab="Liczba obwodów",xlab="Frekwencja")
+lines(f2$breaks[-1],f2$counts,type="s",col="red",lwd=2)
+legend(x=0,y=800,fill=c("blue","red"),legend = c("Miasto","Wieś"),bty="n",cex=0.8)
+dev.off()
+
+# tu ładnie widać
+png(filename=paste0("typ-frek-2.png"),width=809,height=655,type="windows",antialias="cleartype")
+histogram(~frekwencja|typgminy,data=dfgminy[dfgminy$listaid==1,],
+          type="percent",breaks=50,
+          xlab="Frekwencja",
+          ylab="Odsetek obwodów",
+          main="Frekwencja a typ obwodu",
+          layout=c(1,2),
+          col="gold")
+stopka()
+dev.off()
+
+png(filename=paste0("typ-listy-2.png"),width=809,height=655,type="windows",antialias="cleartype")
+histogram(~rezultat.lista|shortlista+typgminy,data=dfgminy[dfgminy$shortlista %in% listy,],
+          type="percent",breaks=25,
+          xlab="Wynik listy",
+          ylab="Odsetek obwodów",
+          main="Wyniki list a typ obwodu",
+          col="gold")
+stopka()
+dev.off()
+
+## ciekawostki ####
+
+rm(list=ls())
+load("data.Rda")
+
+dfgminy<-dfgminy[(dfgminy$kartywydane-dfgminy$glosyniewazne)>100,]
+
+# gdzie jest najwieksze poparcie? (co najmniej 100 kart waznych) ####
+
+listymax=list()
+for (i in listy) {
+        df <- dfgminy[dfgminy$shortlista==i,]
+        dfid<-df$id[df$rezultat.lista==max(df$rezultat.lista,na.rm=TRUE)]
+        listymax$id[i] <- dfid[!is.na(dfid)][1]
+}
+
+# load the package
+library(RODBC)
+# connect to you new data source
+db <- odbcConnect("infobright-wybory2014", uid="root", pwd="",DBMSencoding="UTF8",readOnlyOptimize=TRUE)
+qry <- paste0("SELECT * FROM obwody WHERE obwody.id IN (",paste(unlist(listymax),collapse = ","),")")
+dfmax <- sqlQuery(db, qry, stringsAsFactors=TRUE)
+odbcClose(db)
+
+obwodymax<-data.frame()
+for (l in listy) {
+        obwodymax<-rbind(obwodymax,cbind(
+                dfmax[dfmax$id==listymax$id[l],c("woj","powiat","gmina","siedziba")],
+                dfgminy[dfgminy$id==listymax$id[l] & dfgminy$shortlista==l,c("shortlista","uprawnieni","kartywydane","glosyniewazne","glosy","rezultat.lista")]
+        ))
+}
+write.table(obwodymax,"obwodymax.csv",col.names = TRUE,row.names = FALSE,sep=";",dec=",",fileEncoding="UTF8")
